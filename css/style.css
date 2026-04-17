@@ -410,7 +410,21 @@ p + p { margin-top:1rem; }
     font-family:var(--font-heading); font-style:italic;
     font-size:1.05rem; margin-top:1rem; color:rgba(255,255,255,.6);
 }
-.footer-brand img { height:50px; filter:brightness(0) invert(1); margin-bottom:.5rem; }
+.footer-wordmark {
+    display:inline-block;
+    margin-bottom:.5rem;
+    padding:.35rem .65rem;
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:4px;
+    color:rgba(255,255,255,.9);
+    font-size:.72rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-weight:700;
+}
+.footer-brand img {
+    display:none !important;
+}
 .site-footer h4 { color:var(--white); font-size:.85rem; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:1rem; }
 .site-footer a { color:rgba(255,255,255,.7); }
 .site-footer a:hover { color:var(--white); }

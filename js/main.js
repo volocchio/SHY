@@ -45,3 +45,10 @@ const currentPage = location.pathname.split('/').pop() || 'index.html';
 document.querySelectorAll('.main-nav a').forEach(a => {
     if (a.getAttribute('href') === currentPage) a.classList.add('active');
 });
+
+/* Footer logo fallback: hide broken image placeholders */
+document.querySelectorAll('.footer-brand img').forEach(img => {
+    img.addEventListener('error', () => {
+        img.style.display = 'none';
+    });
+});
