@@ -7,8 +7,8 @@
     <meta name="description" content="Learn about Sandpoint Hot Yoga — our space, our values, and what makes us Sandpoint's original hot yoga studio.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=5">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
 
@@ -32,6 +32,7 @@
 </header>
 
 <section class="page-hero">
+    <img src="img/shy-logo.jpg" alt="Sandpoint Hot Yoga" class="page-hero-logo">
     <h1>About SHY</h1>
     <p>Keeping It Real</p>
 </section>
@@ -107,36 +108,62 @@
             <h2>Our Tribe</h2>
             <p>You are your own best teacher &mdash; these are your guides.</p>
         </div>
-        <div class="tribe-grid">
-            <div class="tribe-card">
+                <div class="tribe-grid">
+            <div class="tribe-card" onclick="openBio('kerri')">
                 <img src="https://storage.googleapis.com/wzukusers/user-16437973/images/5720e5c89b4179B7R8ui/YogaKerri_d400.JPG" alt="Kerri" class="tribe-card-img">
                 <h3>Kerri</h3>
+                <p class="tribe-bio-hint">Read Bio &rarr;</p>
             </div>
-            <div class="tribe-card">
+            <div class="tribe-card" onclick="openBio('julie')">
                 <img src="https://storage.googleapis.com/wzukusers/user-16437973/images/5c3d77eb2f23dR5yucIc/SHY_20_d400.jpg" alt="Julie" class="tribe-card-img">
                 <h3>Julie</h3>
+                <p class="tribe-bio-hint">Read Bio &rarr;</p>
             </div>
-            <div class="tribe-card">
-                <img src="https://storage.googleapis.com/wzukusers/user-16437973/images/5c3ebd1a2ef68TT62Q2g/DSCN2203_d200.JPG" alt="Cheri" class="tribe-card-img">
+            <div class="tribe-card" onclick="openBio('cheri')">
+                <img src="https://storage.googleapis.com/wzukusers/user-16437973/images/5c3d69f3b7958tp8v9ij/yoga-for-seniors-men_d400.jpg" alt="Cheri" class="tribe-card-img">
                 <h3>Cheri</h3>
+                <p class="tribe-bio-hint">Read Bio &rarr;</p>
             </div>
-            <div class="tribe-card">
-                <img src="https://storage.googleapis.com/wzukusers/user-16437973/images/5c3ebd7fb4afaAkzsjkq/DSCN2371_d200.JPG" alt="Noelle" class="tribe-card-img">
+            <div class="tribe-card" onclick="openBio('noelle')">
+                <img src="https://storage.googleapis.com/wzukusers/user-16437973/images/5c3d69f46c336phgwhSb/yoga-for-students_d400.jpg" alt="Noelle" class="tribe-card-img">
                 <h3>Noelle</h3>
+                <p class="tribe-bio-hint">Read Bio &rarr;</p>
             </div>
-            <div class="tribe-card">
-                <img src="https://storage.googleapis.com/wzukusers/user-16437973/images/5c3ebdd0251f9Fo7cdxd/SHY3_101_d200.jpg" alt="Allie" class="tribe-card-img">
+            <div class="tribe-card" onclick="openBio('allie')">
+                <img src="https://storage.googleapis.com/wzukusers/user-16437973/images/5c3ebe59a6d43sDIj1Gx/restore-smaller_d400.jpg" alt="Allie" class="tribe-card-img">
                 <h3>Allie</h3>
+                <p class="tribe-bio-hint">Read Bio &rarr;</p>
             </div>
-            <div class="tribe-card">
-                <img src="https://storage.googleapis.com/wzukusers/user-16437973/images/5c3ebe59a6d43sDIj1Gx/restore-smaller_d400.jpg" alt="Toshi" class="tribe-card-img">
+            <div class="tribe-card" onclick="openBio('toshi')">
+                <img src="https://storage.googleapis.com/wzukusers/user-16437973/images/57f2a10b1e344XQIrcUB/SHY_12_d200.jpg" alt="Toshi" class="tribe-card-img">
                 <h3>Toshi</h3>
+                <p class="tribe-bio-hint">Read Bio &rarr;</p>
             </div>
         </div>
     </div>
 </section>
 
 </main>
+
+<!-- Instructor Bio Modal -->
+<div class="bio-modal-overlay" id="bioModal" onclick="closeBioOnOverlay(event)">
+    <div class="bio-modal">
+        <button class="bio-modal-close" onclick="closeBio()" aria-label="Close">&times;</button>
+        <div class="bio-modal-header">
+            <img src="" alt="" class="bio-modal-img" id="bioModalImg">
+            <div>
+                <h3 id="bioModalName"></h3>
+                <p id="bioModalTitle"></p>
+            </div>
+        </div>
+        <div class="bio-modal-body" id="bioModalBody"></div>
+    </div>
+</div>
+
+<!-- This Is Your Tribe -->
+<div class="tribe-tagline-bar">
+    <span>This is Your Tribe</span>
+</div>
 
 <footer class="site-footer">
     <div class="container">
@@ -175,5 +202,63 @@
 </footer>
 
 <script src="js/main.js?v=2"></script>
+<script>
+const bios = {
+    kerri: {
+        name: 'Kerri',
+        title: 'Owner &amp; Founder',
+        img: 'https://storage.googleapis.com/wzukusers/user-16437973/images/5720e5c89b4179B7R8ui/YogaKerri_d400.JPG',
+        bio: '<p>Kerri is the founder and owner of Sandpoint Hot Yoga. She discovered yoga in 2003 and it quickly became a life-changing practice. Her passion for yoga and community led her to open SHY — Sandpoint\'s original hot yoga studio — to share the practice with everyone in the area.</p><p>Kerri is certified in Bikram/Hot 26, Vinyasa, and various other disciplines. Her classes are encouraging, grounding, and fun. She believes that yoga is for every body and every budget.</p>'
+    },
+    julie: {
+        name: 'Julie',
+        title: 'Instructor',
+        img: 'https://storage.googleapis.com/wzukusers/user-16437973/images/5c3d77eb2f23dR5yucIc/SHY_20_d400.jpg',
+        bio: '<p>Julie has been practicing yoga for over a decade and teaching at SHY for many years. Her classes are warm, welcoming, and always a great workout. She has a gift for making students of all levels feel at ease while challenging them to grow.</p><p>Julie is certified in Hot 26 and Vinyasa, and brings an infectious energy to every class she teaches.</p>'
+    },
+    cheri: {
+        name: 'Cheri',
+        title: 'Instructor',
+        img: 'https://storage.googleapis.com/wzukusers/user-16437973/images/5c3d69f3b7958tp8v9ij/yoga-for-seniors-men_d400.jpg',
+        bio: '<p>Cheri is known for her calm, nurturing approach to teaching. Her classes are accessible to everyone and she has a wonderful ability to meet students exactly where they are in their practice.</p><p>She is certified in Hot 26 and has a background in anatomy that informs her thoughtful, alignment-based instruction.</p>'
+    },
+    noelle: {
+        name: 'Noelle',
+        title: 'Instructor',
+        img: 'https://storage.googleapis.com/wzukusers/user-16437973/images/5c3d69f46c336phgwhSb/yoga-for-students_d400.jpg',
+        bio: '<p>Noelle brings creativity and passion to every class. A long-time member of the SHY community, she stepped into teaching and never looked back. Her Vinyasa classes are dynamic, music-driven, and joyful.</p><p>Noelle is also certified in Yin yoga and loves helping students find stillness and release in a restorative practice.</p>'
+    },
+    allie: {
+        name: 'Allie',
+        title: 'Instructor',
+        img: 'https://storage.googleapis.com/wzukusers/user-16437973/images/5c3ebe59a6d43sDIj1Gx/restore-smaller_d400.jpg',
+        bio: '<p>Allie is a multifaceted instructor with certifications in Pilates, Vinyasa, and Inferno Hot Pilates. Her classes are high-energy, fun, and results-driven. She loves challenging students to discover what their bodies are truly capable of.</p><p>Off the mat, Allie is an avid outdoor enthusiast and brings that love of movement into every class.</p>'
+    },
+    toshi: {
+        name: 'Toshi',
+        title: 'Instructor',
+        img: 'https://storage.googleapis.com/wzukusers/user-16437973/images/57f2a10b1e344XQIrcUB/SHY_12_d200.jpg',
+        bio: '<p>Toshi\'s classes are meditative, precise, and deeply restorative. With a background in traditional Hot 26 and Yin yoga, she guides students to slow down and truly tune in to their bodies.</p><p>Toshi has been practicing yoga for many years and finds the most joy in watching students experience the transformational benefits of a consistent practice.</p>'
+    }
+};
+function openBio(key) {
+    const data = bios[key];
+    if (!data) return;
+    document.getElementById('bioModalImg').src = data.img;
+    document.getElementById('bioModalImg').alt = data.name;
+    document.getElementById('bioModalName').textContent = data.name;
+    document.getElementById('bioModalTitle').innerHTML = data.title;
+    document.getElementById('bioModalBody').innerHTML = data.bio;
+    document.getElementById('bioModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+function closeBio() {
+    document.getElementById('bioModal').classList.remove('open');
+    document.body.style.overflow = '';
+}
+function closeBioOnOverlay(e) {
+    if (e.target === document.getElementById('bioModal')) closeBio();
+}
+</script>
 </body>
 </html>

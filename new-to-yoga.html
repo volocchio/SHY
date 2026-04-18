@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,8 +8,8 @@
     <meta name="description" content="First time at hot yoga? Everything you need to know before your first class at Sandpoint Hot Yoga.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=5">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
 
@@ -32,6 +33,7 @@
 </header>
 
 <section class="page-hero">
+    <img src="img/shy-logo.jpg" alt="Sandpoint Hot Yoga" class="page-hero-logo">
     <h1>New to Yoga</h1>
     <p>You are the perfect candidate for the benefits of yoga</p>
 </section>
@@ -41,17 +43,12 @@
 <!-- Intro -->
 <section class="section reveal">
     <div class="container">
-        <div class="split">
-            <div class="split-content">
-                <h2>Anyone Can Do It</h2>
-                <p>Yoga is not just for the flexible &mdash; just the opposite. If you are not flexible, if you cannot touch your toes, or perhaps cannot even see your toes, you are a perfect candidate for the benefits of yoga.</p>
-                <p>The classes are a series of postures and breathing exercises practiced in a heated room (some classes are hot, some are warm). Most classes are beginner classes &mdash; whether you are an experienced yogi or have never exercised in your life, everyone will receive the benefits.</p>
-                <p>There is a light atmosphere and no pressure to perform. It's up to you to proceed at your own pace and to do as much or as little as you desire. No one will be watching or judging.</p>
-                <p style="font-weight:600;color:var(--primary);margin-top:1.5rem;font-style:italic;">The most difficult part of your yoga experience will hands down be getting yourself to the studio for your first class and walking through the door. Let us take care of the rest.</p>
-            </div>
-            <div class="split-img">
-                <img src="https://storage.googleapis.com/wzukusers/user-16437973/images/5c3d77eb2f23dR5yucIc/SHY_20_d400.jpg" alt="Yoga class at SHY">
-            </div>
+        <div class="section-header" style="max-width:800px;text-align:left;">
+            <h2>Anyone Can Do It</h2>
+            <p>Yoga is not just for the flexible &mdash; just the opposite. If you are not flexible, if you cannot touch your toes, or perhaps cannot even see your toes, you are a perfect candidate for the benefits of yoga.</p>
+            <p class="mt-1">The classes are a series of postures and breathing exercises practiced in a heated room (some classes are hot, some are warm). Most classes are beginner classes &mdash; whether you are an experienced yogi or have never exercised in your life, everyone will receive the benefits.</p>
+            <p class="mt-1">There is a light atmosphere and no pressure to perform. It's up to you to proceed at your own pace and to do as much or as little as you desire. No one will be watching or judging.</p>
+            <p style="font-weight:600;color:var(--primary);margin-top:1.5rem;font-style:italic;">The most difficult part of your yoga experience will hands down be getting yourself to the studio for your first class and walking through the door. Let us take care of the rest.</p>
         </div>
     </div>
 </section>
@@ -87,27 +84,32 @@
             <h2>Common Myths</h2>
             <p>Don't let these misconceptions hold you back.</p>
         </div>
+                <p style="font-size:.9rem;color:var(--primary);font-weight:600;margin-bottom:1.5rem;">Click any myth to read more &darr;</p>
         <div class="grid grid-2">
-            <div class="myth-card">
+            <a href="myths.html#myth1" class="myth-card">
                 <h3>Myth #1</h3>
                 <p><strong>"I've never done yoga, I can't come to a group class until I know what I'm doing."</strong></p>
-                <p>Not true! All of our classes are designed for all levels. You'll learn as you go, and our instructors will guide you every step of the way.</p>
-            </div>
-            <div class="myth-card">
+                <p>Not true! All of our classes are designed for all levels.</p>
+                <span class="myth-link-hint">Read more &rarr;</span>
+            </a>
+            <a href="myths.html#myth2" class="myth-card">
                 <h3>Myth #2</h3>
                 <p><strong>"Guys don't do yoga."</strong></p>
-                <p>Absolutely they do! Many of our regular practitioners are men who come for the strength, flexibility, and stress relief benefits.</p>
-            </div>
-            <div class="myth-card">
+                <p>Absolutely they do! Many of our regular practitioners are men.</p>
+                <span class="myth-link-hint">Read more &rarr;</span>
+            </a>
+            <a href="myths.html#myth3" class="myth-card">
                 <h3>Myth #3</h3>
                 <p><strong>"I'll die in the heat."</strong></p>
-                <p>You won't! The heat helps your muscles warm up safely and allows deeper stretching. Stay hydrated, listen to your body, and take breaks when needed. Not all our classes are hot.</p>
-            </div>
-            <div class="myth-card">
+                <p>You won't! Not all our classes are hot.</p>
+                <span class="myth-link-hint">Read more &rarr;</span>
+            </a>
+            <a href="myths.html#myth4" class="myth-card">
                 <h3>Myth #4</h3>
                 <p><strong>"I can't do yoga because of my condition or illness."</strong></p>
-                <p>Yoga is for every body. Many people come to us specifically for injury recovery, chronic pain, and health conditions. Talk to us about your needs &mdash; we'll help you find the right class.</p>
-            </div>
+                <p>Yoga is for every body.</p>
+                <span class="myth-link-hint">Read more &rarr;</span>
+            </a>
         </div>
     </div>
 </section>
@@ -163,6 +165,11 @@
 </section>
 
 </main>
+
+<!-- This Is Your Tribe -->
+<div class="tribe-tagline-bar">
+    <span>This is Your Tribe</span>
+</div>
 
 <footer class="site-footer">
     <div class="container">
