@@ -296,6 +296,12 @@ p + p { margin-top:1rem; }
 .tribe-card:hover .tribe-card-img { transform:scale(1.05); box-shadow:var(--shadow-hover); }
 .tribe-card h3 { font-size:1.1rem; margin-bottom:.25rem; }
 .tribe-card p { font-size:.85rem; opacity:.8; }
+.tribe-card .tribe-card-role {
+    color: var(--dark);
+    font-weight: 600;
+    opacity: .72;
+    min-height: 2.6em;
+}
 .tribe-card .tribe-bio-hint {
     font-size:.8rem; color:var(--primary); font-weight:600;
     letter-spacing:.5px; margin-top:.25rem;
