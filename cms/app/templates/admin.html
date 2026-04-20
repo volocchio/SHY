@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHY Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/admin.css">
+</head>
+<body>
+    <header class="admin-header">
+        <div class="admin-header-inner">
+            <h1>SHY <span>Admin</span></h1>
+            <div class="admin-user">
+                {{ user }} &middot; <a href="/api/logout">Log out</a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="admin-tabs">
+        <button class="tab active" data-tab="instructors" onclick="switchTab('instructors')">Instructors</button>
+        <button class="tab" data-tab="pricing" onclick="switchTab('pricing')">Pricing</button>
+        <button class="tab" data-tab="events" onclick="switchTab('events')">Events</button>
+    </nav>
+
+    <main class="admin-content">
+        <!-- Instructors Tab -->
+        <div id="tab-instructors" class="tab-panel active">
+            <div class="panel-header">
+                <h2>Instructors</h2>
+                <button class="btn btn-primary" onclick="openBioEditor()">+ Add Instructor</button>
+            </div>
+            <p class="panel-hint">Click an instructor to edit. Drag the arrows to reorder.</p>
+            <div id="bios-list" class="card-grid"></div>
+        </div>
+
+        <!-- Pricing Tab -->
+        <div id="tab-pricing" class="tab-panel">
+            <div class="panel-header">
+                <h2>Pricing</h2>
+                <button class="btn btn-primary" onclick="savePricing()">Save All Changes</button>
+            </div>
+            <p class="panel-hint">Edit prices, descriptions, and options below. Click "Save All Changes" when done.</p>
+            <div id="pricing-editor"></div>
+        </div>
+
+        <!-- Events Tab -->
+        <div id="tab-events" class="tab-panel">
+            <div class="panel-header">
+                <h2>Events</h2>
+                <button class="btn btn-primary" onclick="openEventEditor()">+ Add Event</button>
+            </div>
+            <p class="panel-hint">Manage upcoming events, challenges, and announcements.</p>
+            <div id="events-list"></div>
+        </div>
+    </main>
+
+    <!-- Bio Editor Modal -->
+    <div id="bio-editor-modal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3 id="bio-editor-title">Edit Instructor</h3>
+                <button class="modal-close" onclick="closeBioEditor()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" id="bio-name" placeholder="Instructor name">
+                    </div>
+                    <div class="form-group">
+                        <label>Title / Role</label>
+                        <input type="text" id="bio-title" placeholder="e.g. Vinyasa Instructor">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Photo</label>
+                    <div class="image-upload" id="bio-image-drop">
+                        <img id="bio-image-preview" src="" alt="">
+                        <div class="upload-prompt" id="bio-upload-prompt">
+                            <span class="upload-icon">📷</span>
+                            <p>Click to upload or drag a photo here</p>
+                        </div>
+                        <input type="file" id="bio-image-input" accept="image/*" onchange="handleImageUpload(this)">
+                    </div>
+                    <input type="hidden" id="bio-image-filename">
+                </div>
+                <div class="form-group">
+                    <label>Bio</label>
+                    <div id="bio-quill-editor"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" id="bio-delete-btn" onclick="deleteBio()" style="margin-right:auto">Delete</button>
+                <button class="btn btn-secondary" onclick="closeBioEditor()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveBio()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Editor Modal -->
+    <div id="event-editor-modal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3 id="event-editor-title">Edit Event</h3>
+                <button class="modal-close" onclick="closeEventEditor()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="event-title" placeholder="Event name">
+                    </div>
+                    <div class="form-group">
+                        <label>Dates</label>
+                        <input type="text" id="event-dates" placeholder="e.g. April 3 – May 2">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Image URL</label>
+                    <input type="text" id="event-image" placeholder="https://... (optional)">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="event-description" rows="3" placeholder="Brief event description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Sign-up Link</label>
+                    <input type="text" id="event-signup-link" placeholder="https://... (optional)">
+                </div>
+                <div class="form-group">
+                    <label>Details / Bullet Points</label>
+                    <div id="event-details-list"></div>
+                    <button class="btn btn-sm btn-secondary" onclick="addEventDetail()">+ Add Bullet</button>
+                </div>
+                <div class="form-group">
+                    <label>Resources (downloadable PDFs, etc.)</label>
+                    <div id="event-resources-list"></div>
+                    <button class="btn btn-sm btn-secondary" onclick="addEventResource()">+ Add Resource</button>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="event-active" checked>
+                        Active (visible on site)
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" id="event-delete-btn" onclick="deleteEvent()" style="margin-right:auto">Delete</button>
+                <button class="btn btn-secondary" onclick="closeEventEditor()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveEvent()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+    <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+    <script src="/static/admin.js"></script>
+</body>
+</html>

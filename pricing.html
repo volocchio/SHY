@@ -42,7 +42,7 @@
 <!-- Note -->
 <section class="section" style="padding-bottom:0;">
     <div class="container">
-        <div class="section-header" style="margin-bottom:2rem;">
+        <div class="section-header" id="pricing-notes" style="margin-bottom:2rem;">
             <p>Packages are non-interchangeable. Packages may be purchased on the SHY app, our scheduling software, or in the studio.</p>
             <p class="mt-1" style="font-size:.9rem;">Mat / towel rentals available in the studio: $3 each or both for $5. Please bring cash for purchases under $10.</p>
         </div>
@@ -53,7 +53,7 @@
 <section class="section reveal">
     <div class="container">
         <h2 class="text-center mb-2">Class Packages</h2>
-        <div class="pricing-grid">
+        <div class="pricing-grid" id="packages-grid">
             <div class="pricing-card">
                 <div class="pricing-name">Drop In</div>
                 <div class="pricing-amount">$20</div>
@@ -87,7 +87,7 @@
 <section class="section section-alt reveal">
     <div class="container">
         <h2 class="text-center mb-2">Unlimited Options</h2>
-        <div class="pricing-grid">
+        <div class="pricing-grid" id="unlimited-grid">
             <div class="pricing-card">
                 <div class="pricing-name">1 Month Unlimited</div>
                 <div class="pricing-amount">$90</div>
@@ -121,7 +121,7 @@
 <section class="section reveal">
     <div class="container">
         <h2 class="text-center mb-2">Specials</h2>
-        <div class="grid grid-3">
+        <div class="grid grid-3" id="specials-grid">
             <div class="special-card">
                 <h3>Locals Intro Special</h3>
                 <div class="special-amount">$30</div>
@@ -148,7 +148,7 @@
             <h2>Community Discounts</h2>
             <p>We offer discounts off class packages to the following groups (must be purchased in the studio, ID required).</p>
         </div>
-        <div class="grid grid-3" style="text-align:center;">
+        <div class="grid grid-3" id="discounts-grid" style="text-align:center;">
             <div class="card">
                 <img src="https://storage.googleapis.com/wzukusers/user-16437973/images/5720e5c89b4179B7R8ui/YogaKerri_d400.JPG" alt="Military discount" class="card-img">
                 <div class="card-body">
@@ -232,5 +232,65 @@
 </footer>
 
 <script src="js/main.js?v=2"></script>
+<script>
+// CMS integration — load pricing from JSON if available
+fetch('data/pricing.json')
+  .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
+  .then(function(data) {
+    // Update notes
+    var notes = document.getElementById('pricing-notes');
+    if (notes && (data.note || data.rentalNote)) {
+      notes.innerHTML = '<p>' + (data.note || '') + '</p>' +
+        '<p class="mt-1" style="font-size:.9rem;">' + (data.rentalNote || '') + '</p>';
+    }
+    // Packages
+    var pg = document.getElementById('packages-grid');
+    if (pg && data.packages) {
+      pg.innerHTML = data.packages.map(function(p) {
+        return '<div class="pricing-card' + (p.featured ? ' featured' : '') + '">' +
+          (p.badge ? '<span class="pricing-badge">' + p.badge + '</span>' : '') +
+          '<div class="pricing-name">' + p.name + '</div>' +
+          '<div class="pricing-amount">' + p.price + '</div>' +
+          '<p class="pricing-desc">' + p.description + '</p>' +
+          '<a href="' + (p.ctaLink || 'schedule.html') + '" class="btn btn-primary btn-sm">' + (p.cta || 'Book a Class') + '</a></div>';
+      }).join('');
+    }
+    // Unlimited
+    var ug = document.getElementById('unlimited-grid');
+    if (ug && data.unlimited) {
+      ug.innerHTML = data.unlimited.map(function(p) {
+        return '<div class="pricing-card' + (p.featured ? ' featured' : '') + '">' +
+          (p.badge ? '<span class="pricing-badge">' + p.badge + '</span>' : '') +
+          '<div class="pricing-name">' + p.name + '</div>' +
+          '<div class="pricing-amount">' + p.price + '</div>' +
+          '<p class="pricing-desc">' + p.description + '</p>' +
+          '<a href="' + (p.ctaLink || 'schedule.html') + '" class="btn btn-primary btn-sm">' + (p.cta || 'Get Started') + '</a></div>';
+      }).join('');
+    }
+    // Specials
+    var sg = document.getElementById('specials-grid');
+    if (sg && data.specials) {
+      sg.innerHTML = data.specials.map(function(p) {
+        var priceHtml = p.price || '';
+        if (priceHtml.includes('/mo')) {
+          priceHtml = priceHtml.replace('/mo', '<span style="font-size:1rem;font-weight:400;">/mo</span>');
+        }
+        return '<div class="special-card"><h3>' + p.name + '</h3>' +
+          '<div class="special-amount">' + priceHtml + '</div>' +
+          '<p>' + p.description + '</p></div>';
+      }).join('');
+    }
+    // Discounts
+    var dg = document.getElementById('discounts-grid');
+    if (dg && data.discounts) {
+      dg.innerHTML = data.discounts.map(function(d) {
+        return '<div class="card">' +
+          (d.image ? '<img src="' + d.image + '" alt="' + d.name + '" class="card-img">' : '') +
+          '<div class="card-body"><h3>' + d.name + '</h3><p>' + d.description + '</p></div></div>';
+      }).join('');
+    }
+  })
+  .catch(function() {}); // Silent fallback to hardcoded content
+</script>
 </body>
 </html>

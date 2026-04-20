@@ -1,0 +1,120 @@
+{
+  "note": "Packages are non-interchangeable. Packages may be purchased on the SHY app, our scheduling software, or in the studio.",
+  "rentalNote": "Mat / towel rentals available in the studio: $3 each or both for $5. Please bring cash for purchases under $10.",
+  "packages": [
+    {
+      "name": "Drop In",
+      "price": "$20",
+      "description": "Single session. Good for 6 months if you can't make class.",
+      "featured": false,
+      "badge": "",
+      "cta": "Book a Class",
+      "ctaLink": "schedule.html"
+    },
+    {
+      "name": "5 Classes",
+      "price": "$65",
+      "description": "$13/class \u2014 save by purchasing 5 classes. Expires in 6 months.",
+      "featured": false,
+      "badge": "",
+      "cta": "Book a Class",
+      "ctaLink": "schedule.html"
+    },
+    {
+      "name": "10 Classes",
+      "price": "$110",
+      "description": "$11/class \u2014 save more with 10 classes. Expires in 6 months.",
+      "featured": true,
+      "badge": "Popular",
+      "cta": "Book a Class",
+      "ctaLink": "schedule.html"
+    },
+    {
+      "name": "20 Classes",
+      "price": "$200",
+      "description": "$10/class \u2014 save the most with 20 classes. Expires in 6 months.",
+      "featured": false,
+      "badge": "",
+      "cta": "Book a Class",
+      "ctaLink": "schedule.html"
+    }
+  ],
+  "unlimited": [
+    {
+      "name": "1 Month Unlimited",
+      "price": "$90",
+      "description": "Unlimited classes for 1 month. No commitments.",
+      "featured": false,
+      "badge": "",
+      "cta": "Get Started",
+      "ctaLink": "schedule.html"
+    },
+    {
+      "name": "3 Month Unlimited",
+      "price": "$80/mo",
+      "description": "Must sign up for auto-withdrawal. Not offered online \u2014 purchase in studio.",
+      "featured": false,
+      "badge": "",
+      "cta": "Contact Us",
+      "ctaLink": "contact.html"
+    },
+    {
+      "name": "Monthly Unlimited",
+      "price": "$75/mo",
+      "description": "6 month minimum commitment. Cancel anytime after 6 months. Purchase in studio.",
+      "featured": true,
+      "badge": "Best Value",
+      "cta": "Contact Us",
+      "ctaLink": "contact.html"
+    },
+    {
+      "name": "Partners Unlimited",
+      "price": "$112.50/mo",
+      "description": "Sign up as a couple \u2014 second person gets 50% off! Same terms as monthly unlimited.",
+      "featured": false,
+      "badge": "",
+      "cta": "Contact Us",
+      "ctaLink": "contact.html"
+    }
+  ],
+  "specials": [
+    {
+      "name": "Locals Intro Special",
+      "price": "$30",
+      "description": "20 days of unlimited yoga! For new local students to take advantage of all our offerings. May be purchased one time.",
+      "featured": false,
+      "badge": ""
+    },
+    {
+      "name": "Limited Monthly",
+      "price": "$60/mo",
+      "description": "Our best deal ever! 8 classes/month with auto-withdrawal. 3 month minimum. Perfect for people who travel or practice twice/week. Purchase in studio.",
+      "featured": false,
+      "badge": ""
+    },
+    {
+      "name": "Out-of-Towner",
+      "price": "$40",
+      "description": "For out-of-town visitors \u2014 unlimited classes for up to 1 week. Expires in 7 days. Purchase online or in studio.",
+      "featured": false,
+      "badge": ""
+    }
+  ],
+  "discounts": [
+    {
+      "name": "Military Members",
+      "description": "Thank you for your service. Discounted packages available in studio.",
+      "image": "https://storage.googleapis.com/wzukusers/user-16437973/images/5720e5c89b4179B7R8ui/YogaKerri_d400.JPG"
+    },
+    {
+      "name": "Students",
+      "description": "Valid student ID required. Discounted packages available in studio.",
+      "image": "https://storage.googleapis.com/wzukusers/user-16437973/images/5c3d69f46c336phgwhSb/yoga-for-students_d400.jpg"
+    },
+    {
+      "name": "Seniors (60+)",
+      "description": "Age is just a number. Discounted packages available in studio.",
+      "image": "https://storage.googleapis.com/wzukusers/user-16437973/images/5c3d69f3b7958tp8v9ij/yoga-for-seniors-men_d400.jpg"
+    }
+  ]
+}

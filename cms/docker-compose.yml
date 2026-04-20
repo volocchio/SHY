@@ -1,0 +1,23 @@
+services:
+  shy-cms:
+    build: .
+    container_name: shy_cms
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8516:8000"
+    volumes:
+      - /var/www/shy/data:/app/data
+      - /var/www/shy/images:/app/images
+    environment:
+      - DATA_DIR=/app/data
+      - IMAGES_DIR=/app/images
+      - SEED_DIR=/app/seed
+      - ADMIN_USER=kerri
+      - ADMIN_PASS=${SHY_ADMIN_PASS:-shyadmin2026}
+      - SECRET_KEY=${SHY_SECRET_KEY:-change-me-in-production}
+    networks:
+      - caddy-net
+
+networks:
+  caddy-net:
+    external: true

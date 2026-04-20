@@ -108,7 +108,7 @@
             <h2>Our Tribe</h2>
             <p>You are your own best teacher &mdash; these are your guides, coaches, and steady voices in the room.</p>
         </div>
-        <div class="tribe-grid">
+        <div class="tribe-grid" id="tribe-grid">
             <div class="tribe-card" onclick="openBio('kerri')">
                 <img src="images/Kerri.jpg" alt="Kerri" class="tribe-card-img">
                 <h3>Kerri</h3>
@@ -373,6 +373,36 @@ function closeBio() {
 function closeBioOnOverlay(e) {
     if (e.target === document.getElementById('bioModal')) closeBio();
 }
+
+// CMS integration — load bios from JSON if available
+fetch('data/bios.json')
+  .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
+  .then(function(data) {
+    // Update bios object for modal
+    var newBios = {};
+    data.forEach(function(b) {
+      newBios[b.id] = {
+        name: b.name,
+        title: b.title,
+        img: 'images/' + b.image,
+        bio: b.bio
+      };
+    });
+    Object.keys(bios).forEach(function(k) { delete bios[k]; });
+    Object.assign(bios, newBios);
+    // Rebuild tribe cards
+    var grid = document.getElementById('tribe-grid');
+    if (grid) {
+      grid.innerHTML = data.map(function(b) {
+        return '<div class="tribe-card" onclick="openBio(\'' + b.id + '\')">' +
+          '<img src="images/' + b.image + '" alt="' + b.name + '" class="tribe-card-img">' +
+          '<h3>' + b.name + '</h3>' +
+          '<p class="tribe-card-role">' + b.title + '</p>' +
+          '<p class="tribe-bio-hint">Read Bio &rarr;</p></div>';
+      }).join('');
+    }
+  })
+  .catch(function() {}); // Silent fallback to hardcoded data
 </script>
 </body>
 </html>

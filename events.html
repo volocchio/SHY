@@ -37,7 +37,7 @@
     <p>What's happening at SHY</p>
 </section>
 
-<main>
+<main id="events-content">
 
 <!-- Spring Challenge -->
 <section class="section reveal">
@@ -152,5 +152,61 @@
 </footer>
 
 <script src="js/main.js?v=2"></script>
+<script>
+// CMS integration — load events from JSON if available
+fetch('data/events.json')
+  .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
+  .then(function(events) {
+    var activeEvents = events.filter(function(e) { return e.active !== false; });
+    if (!activeEvents.length) return;
+    var main = document.getElementById('events-content');
+    if (!main) return;
+    var html = '';
+    activeEvents.forEach(function(ev, i) {
+      // Event feature section
+      html += '<section class="section' + (i % 2 ? ' section-alt' : '') + ' reveal">' +
+        '<div class="container"><div class="event-feature">';
+      if (ev.image) {
+        html += '<img src="' + ev.image + '" alt="' + ev.title + '" class="event-feature-img">';
+      }
+      html += '<div class="event-feature-content"><h2>' + ev.title + '</h2>';
+      if (ev.dates) {
+        html += '<p style="font-size:1.1rem;font-weight:600;color:var(--primary);">' + ev.dates + '</p>';
+      }
+      if (ev.description) html += '<p>' + ev.description + '</p>';
+      if (ev.details && ev.details.length) {
+        html += '<ul>' + ev.details.map(function(d) { return '<li>' + d + '</li>'; }).join('') + '</ul>';
+      }
+      if (ev.signupLink) {
+        html += '<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">' +
+          '<a href="' + ev.signupLink + '" class="btn btn-primary" target="_blank" rel="noopener">Sign Up Now</a></div>';
+      }
+      html += '</div></div></div></section>';
+      // Resources
+      if (ev.resources && ev.resources.length) {
+        html += '<section class="section section-alt reveal"><div class="container">' +
+          '<div class="section-header"><h2>Resources</h2></div>' +
+          '<div class="grid grid-3" style="text-align:center;">';
+        ev.resources.forEach(function(r) {
+          html += '<div class="card"><div class="card-body">' +
+            '<h3>' + r.title + '</h3><p>' + (r.description || '') + '</p>';
+          if (r.link) {
+            html += '<a href="' + r.link + '" class="btn btn-secondary btn-sm mt-1" target="_blank" rel="noopener">Download</a>';
+          }
+          html += '</div></div>';
+        });
+        html += '</div></div></section>';
+      }
+    });
+    // Keep the Stay Connected CTA
+    html += '<section class="section reveal"><div class="container">' +
+      '<div class="cta-banner"><h2>Stay Connected</h2>' +
+      '<p>Follow us on Facebook for the latest news, schedule changes, and community updates.</p>' +
+      '<a href="https://www.facebook.com/sandpointhotyoga/" class="btn btn-outline" target="_blank" rel="noopener">Follow on Facebook</a>' +
+      '</div></div></section>';
+    main.innerHTML = html;
+  })
+  .catch(function() {}); // Silent fallback to hardcoded content
+</script>
 </body>
 </html>
